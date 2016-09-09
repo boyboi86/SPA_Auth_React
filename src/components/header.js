@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 
 class Header extends Component{
@@ -33,4 +34,11 @@ function mapStateToProps(state){
   return { authenticated: state.authenticated }
 }
 
-export default connect(mapStateToProps, actions)(Header)
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(actions, dispatch)
+}
+
+/** Alternatively without mapDispatchToProps
+  * export default connect(mapStateToProps, actions)(Header)
+  */
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
